@@ -1,0 +1,173 @@
+***Comandos GIT*** Atualizado em 08/03/2022
+
+***listar as configurações git
+git config --list
+
+***Configurar nome e e-mail no git
+git config --global user.name "Seu Nome"
+git config --global user.email "seu.nome@gmail.com"
+
+***Configurando nome e e-mail no repositório local
+git config user.email "Seu Nome"
+git config user.email "email@example.com"
+
+***para saber o nome do servidor digitar o comando abaixo
+git remote //listar o nome do servidor
+
+***Adicionar o repositorio remoto em nossa área de trabalho, adicionando a origem na qual vamos enviar nossos arquivos do projeto (neste caso se já tivessemos criado um repositório local e trabalhado nele. No GitHub tem a opção de subir um repositório existente) semelhante a opção git clone
+git remote add origin https://github.com.br/darpbr/projeto.git
+
+***listar os repositórios que já temos cadastrado
+git remote -v
+
+***subir alterações feitas
+git push origin feature/parser
+//sendo origin o nome do servidor e feature/parser a branch
+
+***Se precisar renomear o repositorio digitar o comando abaixo
+git remote rename origin local //onde local é o nome que queremos
+
+***trazer os dados do repositorio remoto
+**este comando vai puxar os dados para a branch master
+git pull origin master
+
+***Subindo aplcação pro repositório após alterar informações
+**depois de alterar digitar os comandos para subir pro repositório
+git status //verificar se paarecem os arquivos modificados
+git add . //onde . pode ser o nome do arquivo/arquivos modificados
+git commit -m "texto descrevendo as alterações"
+git push origin feature/parser //origin=servidor feature/parser=branch
+
+***Verificar modificação feita
+git log -p //digitar q para sair
+git log --graph //apresenta as linhas das branches, "q" para sair
+
+***Trabalhando com branches
+**exibe as branches criadas
+git branch 
+
+**Criar uma nova branch
+git branch titulo //nome da branch
+
+**Mudar para outra branch
+git checkout titulo
+
+**Criar uma branch a partir de um checkout, cria a branch e já muda para a mesma
+git checkout -b titulo //titulo é o nome da nova branch
+
+***unindo as branche master e "titulo"
+**se tiver algum commit na branch titulo e precisar corrigir algum bug na branch master
+**efetua a correção em master e na própria master rodar o comando merge, com este comando os commit da branch titulo se unirão ao commit da master e irão para a branch master (pode mandar os commits para a branch master ou outra qualquer)
+
+git merge titulo //titulo sendo o nome de uma outra branch qualquer que vai unir a branch atual
+
+***Para mudar os commits da branch titulo para master sem efetuar o merge
+**atualizando a branch master com os commits das outras branches. na branch master
+**rodar o comando rebase (deve estar na branch master)
+git rebase titulo
+
+***Verificar alterações feitas no commit
+git diff
+
+***Para subir as alterações feitas
+
+git add .
+git commit -m "texto descrevendo as alterações feitas"
+git push origin master
+
+***unindo vários commits em um só
+
+git log --oneline //verificar os commits feitos
+
+git rebase -i HEAD~3 //a partir do trabalho atual (HEAD vai unir os 3 ultimos commits)
+
+**vai aparecer uma tela com os 3 commits e na frente deles a palavra pick, é só substiruir a palavra pick por s para unir os commits que pretende (o primeiro commit deve permanecer com a informação de pick)
+Quando salvar vai pedir para informar uma mensagem de commit, é só informar a mensagem e salvar (":x" para sair)
+
+*** após esta configuração é só realizar o comando a seguir
+
+git push origin master
+
+*** após isto se estiver trabalhando em equipe depois de enviar os commits precisa fazer um pull request no gitlab para envio ao "dono" do projeto
+
+***Para "puxar" o commit de uma branch para a master devemos rodar o seguinte comando. O comando deve ser rodado na branch master
+
+git cherry-pick (hash do commit - pode ser consultado no log --oneline na branch que efetuou o commit)
+
+***fazendo busca dentro dos commits
+git bisect start
+
+git bisect bad HEAD //caso queira procurar algum erro no HEAD(estado atual)
+
+git bisect good hash //hash do commit que vai limitar a busca
+
+***caso não tenha encontrado ainda digitar o comando a seguir
+
+git bisect bad
+
+*** caso a busca seja feita com sucesso digitar o comando
+
+git bisect good
+
+***para encerrar a busca basta digitar
+
+git bisect reset
+
+***mostrar as alterações de um commit
+
+git show hash //hash do commit que queremos ver
+
+***para reverter/desfazer um commit
+
+git revert hash //hash do commit
+
+***comando para exibir o responsável por cada linha atual do código, quem alterou a linha de código pela ultima vez
+
+git blame arquivo //arquivo sendo o nome do arquivo que queremos analisar podendo ser um .xml, .html....
+
+***para remover uma branch basta digitar o comando
+
+git branch -d titulo
+
+
+***Criação de tag para controle de versão, a cada nova versão enviada para a master adicionar uma tag de versão
+git tag -a v0.2.0 -m "Nova versão adicionada"
+
+***Aplicativos para realizar os comandos git de forma gráfica
+git cola
+github desktop -> melhor aplicativo que o git cola
+git kraken -> melhor ferramente para git, mais completo
+
+***Para enviar uma aplicação para produção quando enviar o commit(hook - evento)
+
+**entrar na pasta .git
+cd .git
+
+**acessar a pasta hooks
+cd hooks
+
+**existem algums arquivos de exemplo (.sample)
+**criar o arquivo pre-commit para automatizar alguma ação no evento de commit
+**o arquivo é um shel script
+
+nano pre-commit
+
+**cabeçalho do script
+#!/bin/sh
+
+
+**após salvar as instruções do script rodar o comando para dar permissão ao script (ls -l):
+
+chmod u+x pre-commit
+
+***Deploy com git
+**acessar o servidor
+cd ../servidor/
+cd hooks
+nano post-recive
+#!/bin/sh
+git --git-dir="C:\Users\Alura\Documents\git-e-github\servidor" --work-tree="C:\Users\Alura\Documents\git-e-github\web" checkout -f //mapeando a pasta do servidor em um diretório de trabalho que vai funcionar como um servidor web por exemplo, a pasta web já deve existir no repositório
+
+**executar o comando a seguir para verificar as permissoes
+
+ls -l
