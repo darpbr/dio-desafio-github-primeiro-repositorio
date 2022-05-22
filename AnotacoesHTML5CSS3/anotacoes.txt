@@ -1,0 +1,94 @@
+link para estudar sobre diversas personalizações: https://developer.mozilla.org/pt-BR/
+
+** Ordem de personalização das bordas padding, exemplo:
+.post{
+    padding: 15px(parte superior) 10px (lado direito) 5px (parte inferior) 0px (lado esquerdo);
+}
+
+** Outro exemplo a seguir:
+.post {
+    padding-top: 15px;
+    padding-right: 10px;
+    padding-botton: 5px;
+    padding-left: 0px;
+}
+
+** Personalizando Bachground
+.post {
+    background-color: green;
+    background-image: url(".imagens/background.png");
+    background-position: top;
+}
+
+** personalizando bordas 
+(border-top, border-right, border-botton, border-left) - posicionamento da borda a ser alterada
+(border-width, border-color, border-style) - Propriedades da borda
+
+.post {
+    border: 3px (largura) solid (estilo) blue (cor);
+    border-top: 2px dotted green; (altera apenas a borda superior)(estilo pontilhado)
+    border-right: 4px dashed pink; (estilo tracejado)
+}
+
+** Podemos ainda alterar apenas uma característica de um dos lados da borda. Exemplo:
+.post {
+    border-top-width: 3px;
+    border-top-color: red;
+    border-left-style: solid;
+}
+
+** Existe ainda a propriedade border-radius que serve para arredondar os cantos da borda.
+Exemplos:
+
+border-radius: 10px;
+border-radius: 50%; -> Transforma um quadrado em um círculo
+border-radius: 10% 20%;
+border-radius: 10% 20% 15% 22%; -> segue a ordem das bordas top-right-botton-left
+
+***Estilizando textos
+** font-family -> Utilizado para alterar a fonte de nossos textos, podem ser utilizadas fontes
+disponíveis em nosso pc ou baixadas da web
+.title {
+    font-family: Verdana;
+}
+
+.post {
+    font-family: Verdana, Arial; - Caso a fonte Verdana falhe a Arial serve de segunda opção
+}
+** font-size -> Tamanho da fonte
+.title {
+    font-size: 30px;
+}
+**font-style -> altera a aparência de nosso texto. itálico por exemplo...(normal é o padrão)
+*caso a fonte utilizada não forneça suporte ao estilo itálico o navegador vai forçar uma inclinação
+.title {
+    font-style: italic;
+}
+**font-weight -> "peso" do texto, normal/bold(negrito) - usado com fontes mais completas
+.title {
+    font-weight: bold;
+}
+**text-tranform -> Transforma o texto em maiusculo, minusculo, só a primeira letra maiuscula
+.title {
+    text-transform: uppercase; (lowercase/capitalize)
+}
+**text-decoration -> colocar linha no texto, sublinhado, taxado...
+.title {
+    text-decoration: underline; (overline/line-through)
+}
+**list-style-type -> altera exibição de listas ordenadas e não ordenadas
+ul {
+    list-style-type: square; -> alterando o icone para um quadrado
+}
+
+ol {
+    list-style-type: upper-roman; -> alterando para número romano maiusculo
+}
+
+ul {
+    list-style-type: "\1F44D";
+}
+
+ul {
+    list-style-image: url("rocket.png"); -> passa uma imagem como ícone
+}
